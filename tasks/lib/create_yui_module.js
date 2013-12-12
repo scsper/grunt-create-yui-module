@@ -42,7 +42,7 @@ exports.init = function (grunt) {
                     openStr = open || '',
                     closeStr = close || '';
 
-                if(typeof name === "string") {
+                if(typeof name === "string" && name.length > 0) {
                     str = openStr + name + closeStr;
                 }
 
