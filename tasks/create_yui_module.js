@@ -17,9 +17,18 @@ module.exports = function (grunt) {
         var source = this.data.src || this.data.files.src || '';
         var destination = this.data.dest  || this.data.files.dest || '';
         var options = this.options() || {};
+        var template;
 
-        var template = create_yui_module.run(source, options);
+        function validate(str) {
+            if(!str || typeof str !== "string" || str.length === 0) {
+                grunt.fatal(str + " is not a valid source or destination.");
+            }
+        }
 
+        validate(source);
+        validate(destination);
+
+        template = create_yui_module.run(source, options);
         grunt.file.write(destination, template);
     });
 
