@@ -47,25 +47,23 @@ module.exports = function(grunt) {
       no_requires: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/all.js',
+          dest: 'tmp/no_requires.js',
         },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
-          version: '1.0.0',
-          requires: ['module1', 'module2']
+          version: '1.0.0'
         }
       },
 
       no_version: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/all.js',
+          dest: 'tmp/no_version.js',
         },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
-          version: '1.0.0',
           requires: ['module1', 'module2']
         }
       },
@@ -73,11 +71,10 @@ module.exports = function(grunt) {
       no_namespace: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/all.js',
+          dest: 'tmp/no_namespace.js',
         },
         options: {
           moduleName: 'mail-core-compose-template',
-          namespace: 'ui.Templates',
           version: '1.0.0',
           requires: ['module1', 'module2']
         }
