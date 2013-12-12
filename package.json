@@ -1,0 +1,31 @@
+{
+  "name": "grunt-create-yui-module",
+  "description": "A grunt task which takes any javascript file and converts it to a YUI module. ",
+  "version": "0.1.6",
+  "homepage": "https://github.com/scsper/grunt-create-yui-module",
+  "author": {
+    "name": "Scott Sperling",
+    "email": "scsper@yahoo.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scsper/grunt-create-yui-module.git"
+  },
+  "bugs": {
+    "url": "https://github.com/scsper/grunt-create-yui-module/issues"
+  },
+  "dependencies": {
+    "colors": "~0.6.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-nodeunit": "~0.2.2",
+    "grunt-contrib-jshint": "~0.7.2"
+  },
+  "keywords": [
+    "gruntplugin",
+    "yui",
+    "module"
+  ],
+  "contributors": []
+}
