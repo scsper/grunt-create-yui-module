@@ -29,6 +29,10 @@ exports.init = function (grunt) {
 
             var top, ns, content, bottom, template;
 
+            if(!moduleName || typeof moduleName !== "string" || moduleName.length === 0) {
+                grunt.fatal('Please provide a module name.');
+            }
+
             function is_array(value) {
                 return value &&
                     typeof value === 'object' &&
