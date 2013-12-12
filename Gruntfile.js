@@ -44,42 +44,45 @@ module.exports = function(grunt) {
         }
       },
 
-      without_version: {
-        src: 'test/fixtures/helloworld.js',
-        dest: 'tmp/no_version.js',
+      no_requires: {
+        files: {
+          src: 'test/fixtures/helloworld.js',
+          dest: 'tmp/all.js',
+        },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
+          version: '1.0.0',
           requires: ['module1', 'module2']
         }
       },
 
-      without_requires: {
+      no_version: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/no_requires.js',
-          options: {
-            moduleName: 'mail-core-compose-template',
-            namespace: 'ui.Templates',
-            version: '1.0.0',
-          }
+          dest: 'tmp/all.js',
+        },
+        options: {
+          moduleName: 'mail-core-compose-template',
+          namespace: 'ui.Templates',
+          version: '1.0.0',
+          requires: ['module1', 'module2']
         }
       },
 
-      without_namespace: {
+      no_namespace: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/no_namespace.js',
-          options: {
-            moduleName: 'mail-core-compose-template',
-            version: '1.0.0',
-            requires: ['module1', 'module2']
-          }
+          dest: 'tmp/all.js',
+        },
+        options: {
+          moduleName: 'mail-core-compose-template',
+          namespace: 'ui.Templates',
+          version: '1.0.0',
+          requires: ['module1', 'module2']
         }
       }
-
-    },
-
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
