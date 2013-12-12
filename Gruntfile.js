@@ -91,7 +91,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'test']);
-  grunt.registerTask('scott', ['clean', 'create_yui_module:all']);
   grunt.registerTask('test', ['nodeunit']);
 
 };
