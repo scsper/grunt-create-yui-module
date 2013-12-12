@@ -27,7 +27,7 @@ exports.init = function (grunt) {
                 moduleName = options.moduleName || '',
                 version = options.version || '';
 
-            var top, ns, content, bottom;
+            var top, ns, content, bottom, template;
 
             function is_array(value) {
                 return value &&
@@ -50,8 +50,9 @@ exports.init = function (grunt) {
             }
 
             function buildRequires(requires) {
-                var YUI_REQUIRES_CLOSE = "]",
-                    requiresStr = ', [', length;
+                var close = "]",
+                    requiresStr = ', [',
+                    length, i;
 
                 if(!is_array(requires)) {
                     return '';
@@ -62,12 +63,13 @@ exports.init = function (grunt) {
                 if(length === 0) {
                     return '';
                 } else {
-                    for(var i = 0; i < length; i++) {
-                        requiresStr += requires[i];
+                    for(i = 0; i < length; i++) {
+                        if(i > 0) requiresStr += ',';
+                        requiresStr += "'" + requires[i] + "'";
                     }
                 }
 
-                requiresStr += YUI_REQUIRES_CLOSE;
+                requiresStr += close;
                 return requiresStr;
             }
 
@@ -76,7 +78,9 @@ exports.init = function (grunt) {
             content = grunt.file.read(source);
             bottom = YUI_FUNCTION_CLOSE + buildStr(version, YUI_VERSION_OPEN, YUI_VERSION_CLOSE) + buildRequires(requires) + YUI_ADD_CLOSE;
 
-            console.log(top + ns + content + bottom);
+            template = top + ns + content + bottom;
+
+            return template;
         }
     };
 };
