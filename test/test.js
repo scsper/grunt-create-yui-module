@@ -6,26 +6,35 @@ var create_yui_module = require('../tasks/lib/create_yui_module').init(grunt);
 
 
 exports.nodeunit = {
-  build_module_with_no_version: function(test) {
-    test.expect(1);
-    test.ok(true, 'this had better work.');
+  build_all: function(test) {
+    var actual = grunt.file.read('tmp/all.js');
+    var expected = grunt.file.read('test/expect/all.js');
+
+    test.equal(expected, actual, "expected javascript did not match the actual javascript");
     test.done();
   },
 
-  build_module_with_everything: function(test) {
-    var filepath = 'tmp/module_with_everything.js';
-    // var filepath = 'tmp/helloworld.js';
-    var expected = grunt.file.read(filepath),
-        source = 'fixtures/helloworld.js',
-        options = {
-          moduleName: 'mail-core-compose-template',
-          namespace: 'ui.Templates',
-          version: '1.0.0',
-          requires: ['module1', 'module2']
-        };
+  build_no_version: function(test) {
+    var actual = grunt.file.read('tmp/no_version.js');
+    var expected = grunt.file.read('test/expect/no_version.js');
 
-    var actual = create_yui_module.run(source, options);
+    test.equal(expected, actual, "expected javascript did not match the actual javascript");
+    test.done();
+  },
 
-    test.ok(expected === actual, "expected did not match the actual");
+  build_no_namespace: function(test) {
+    var actual = grunt.file.read('tmp/no_namespace.js');
+    var expected = grunt.file.read('test/expect/no_namespace.js');
+
+    test.equal(expected, actual, "expected javascript did not match the actual javascript");
+    test.done();
+  },
+
+  build_no_requires: function(test) {
+    var actual = grunt.file.read('tmp/no_requires.js');
+    var expected = grunt.file.read('test/expect/no_requires.js');
+
+    test.equal(expected, actual, "expected javascript did not match the actual javascript");
+    test.done();
   }
 };
