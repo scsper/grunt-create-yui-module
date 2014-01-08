@@ -1,0 +1,1 @@
+YUI.add('mail-core-compose-template',function(Y){console.log("Hello world!");}, '1.0.0', ['module1','module2']);
