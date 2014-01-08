@@ -1,0 +1,1 @@
+YUI.add('mail-core-compose-template',function(Y){console.log("Goodbye world!");});

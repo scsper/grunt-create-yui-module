@@ -25,7 +25,8 @@ exports.init = function (grunt) {
             var namespace = options.namespace || '',
                 requires = options.requires || [],
                 moduleName = options.moduleName || '',
-                version = options.version || '';
+                version = options.version || '',
+                process = options.process || null;
 
             var top, ns, content, bottom, template;
 
@@ -80,6 +81,11 @@ exports.init = function (grunt) {
             top = buildStr(moduleName, YUI_ADD_OPEN) + YUI_FUNCTION_OPEN;
             ns = buildStr(namespace, YUI_NAMESPACE_OPEN, YUI_NAMESPACE_CLOSE);
             content = grunt.file.read(source);
+
+            if(process) {
+                content = process(content);
+            }
+
             bottom = YUI_FUNCTION_CLOSE + buildStr(version, YUI_VERSION_OPEN, YUI_VERSION_CLOSE) + buildRequires(requires) + YUI_ADD_CLOSE;
 
             template = top + ns + content + bottom;

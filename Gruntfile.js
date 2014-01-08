@@ -86,8 +86,22 @@ module.exports = function(grunt) {
           dest: 'tmp/',
         },
         options: {
-          moduleName: 'mail-core-compose-template',
+          moduleName: 'mail-core-compose-template'
         }
+      },
+
+      process: {
+          files: {
+            src: 'test/fixtures/helloworld.js',
+            dest: 'tmp/process.js',
+          },
+          options: {
+            moduleName: 'mail-core-compose-template',
+            process: function(content) {
+              content = content.replace("Hello", "Goodbye");
+              return content;
+            }
+          }
       }
     }
   });
@@ -100,7 +114,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'create_yui_module:recurse', 'test']);
+  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'create_yui_module:recurse', 'create_yui_module:process', 'test']);
   grunt.registerTask('test', ['nodeunit']);
 
 };

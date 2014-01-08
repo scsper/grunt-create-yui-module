@@ -49,5 +49,13 @@ exports.nodeunit = {
     test.equal(expectedRecurse, actualRecurse, "expected recurse javascript did not match the actual javascript");
 
     test.done();
+  },
+
+  build_process: function(test) {
+    var actual = grunt.file.read('tmp/process.js');
+    var expected = grunt.file.read('test/expect/process.js');
+
+    test.equal(expected, actual, "expected javascript did not match the actual javascript");
+    test.done();
   }
 };
