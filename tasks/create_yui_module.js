@@ -16,6 +16,8 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('create_yui_module', 'Make a YUI module out of any Javascript file.', function () {
         var source = this.data.src || this.data.files.src || '';
         var destinationRoot = this.data.dest  || this.data.files.dest || '';
+        var ext = this.data.ext  || this.data.files.ext || '';
+
         var options = this.options() || {};
         var template;
 
@@ -48,6 +50,11 @@ module.exports = function (grunt) {
             validate(destinationRoot);
 
             template = create_yui_module.run(source, options);
+
+            if(ext) {
+                destPath = destPath.split(".")[0] + ext;
+            }
+
             grunt.file.write(destinationRoot + destPath, template);
         }
 
@@ -56,7 +63,7 @@ module.exports = function (grunt) {
                 var destPath = "";
 
                 if(subdir) {
-                    destPath = subdir;
+                    destPath = subdir + '/';
                 }
 
                 destPath += filename;

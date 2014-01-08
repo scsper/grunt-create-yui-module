@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 
       recurse: {
         files: {
-          src: 'test/fixtures',
+          src: 'test/fixtures/',
           dest: 'tmp/',
         },
         options: {
@@ -91,17 +91,28 @@ module.exports = function(grunt) {
       },
 
       process: {
-          files: {
-            src: 'test/fixtures/helloworld.js',
-            dest: 'tmp/process.js',
-          },
-          options: {
-            moduleName: 'mail-core-compose-template',
-            process: function(content) {
-              content = content.replace("Hello", "Goodbye");
-              return content;
-            }
+        files: {
+          src: 'test/fixtures/helloworld.js',
+          dest: 'tmp/process.js',
+        },
+        options: {
+          moduleName: 'mail-core-compose-template',
+          process: function(content) {
+            content = content.replace("Hello", "Goodbye");
+            return content;
           }
+        }
+      },
+
+      ext: {
+        files: {
+          src: 'test/fixtures/ext/',
+          dest: 'tmp/',
+          ext: '.js'
+        },
+        options: {
+          moduleName: 'mail-core-compose-template'
+        }
       }
     }
   });
@@ -114,7 +125,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'create_yui_module:recurse', 'create_yui_module:process', 'test']);
+  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'create_yui_module:recurse', 'create_yui_module:process', 'create_yui_module:ext', 'test']);
   grunt.registerTask('test', ['nodeunit']);
 
 };
