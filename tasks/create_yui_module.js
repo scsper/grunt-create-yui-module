@@ -17,6 +17,7 @@ module.exports = function (grunt) {
         var source = this.data.src || this.data.files.src || '';
         var destinationRoot = this.data.dest  || this.data.files.dest || '';
         var options = this.options() || {};
+        var exclude_extension = options.exclude || false;
         var template;
 
         function validate(str) {
@@ -26,21 +27,13 @@ module.exports = function (grunt) {
         }
 
         function is_folder() {
-            var sourcePath = source.split('.');
-            var destPath = destinationRoot.split('.');
+            var source_extension = path.extname(source);
+            var dest_extension = path.extname(destinationRoot);
 
-
-            if(sourcePath.length === 1) { // if the source path has a dot
-                if(destPath.length !== 1) {
-                    grunt.fatal("Both the source and the destination must be folders or files.");
-                }
-                return true;
-            } else {
-                if(destPath.length === 1) {
-                    grunt.fatal("Both the source and the destination must be folders or files.");
-                }
+            if(source_extension !== "" || dest_extension !== "") { // if the source path has a dot
                 return false;
             }
+            return true;
         }
 
         function run(source, destPath) {
@@ -53,6 +46,11 @@ module.exports = function (grunt) {
 
         if(is_folder()) {
             grunt.file.recurse(source, function cb(abspath, rootdir, subdir, filename) {
+
+                if(exclude_extension && path.extname(abspath) === exclude_extension) {
+                    return;
+                }
+
                 var destPath = "";
 
                 if(subdir) {

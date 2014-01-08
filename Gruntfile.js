@@ -34,61 +34,67 @@ module.exports = function(grunt) {
       all: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/all.js',
+          dest: 'tmp/all.js'
         },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
           version: '1.0.0',
-          requires: ['module1', 'module2']
+          requires: ['module1', 'module2'],
+          exclude: ".txt"
         }
       },
 
       no_requires: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/no_requires.js',
+          dest: 'tmp/no_requires.js'
         },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
-          version: '1.0.0'
+          version: '1.0.0',
+          exclude: ".txt"
         }
       },
 
       no_version: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/no_version.js',
+          dest: 'tmp/no_version.js'
         },
         options: {
           moduleName: 'mail-core-compose-template',
           namespace: 'ui.Templates',
-          requires: ['module1', 'module2']
+          requires: ['module1', 'module2'],
+          exclude: ".txt"
         }
       },
 
       no_namespace: {
         files: {
           src: 'test/fixtures/helloworld.js',
-          dest: 'tmp/no_namespace.js',
+          dest: 'tmp/no_namespace.js'
         },
         options: {
           moduleName: 'mail-core-compose-template',
           version: '1.0.0',
-          requires: ['module1', 'module2']
+          requires: ['module1', 'module2'],
+          exclude: ".txt"
         }
       },
 
       recurse: {
         files: {
           src: 'test/fixtures',
-          dest: 'tmp/',
+          dest: 'tmp/'
         },
         options: {
           moduleName: 'mail-core-compose-template',
+          exclude: ".txt"
         }
       }
+
     }
   });
 
