@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
     grunt.registerMultiTask('create_yui_module', 'Make a YUI module out of any Javascript file.', function () {
         var source = this.data.src || this.data.files.src || '';
-        var destination = this.data.dest  || this.data.files.dest || '';
+        var destinationRoot = this.data.dest  || this.data.files.dest || '';
         var options = this.options() || {};
         var template;
 
@@ -25,11 +25,48 @@ module.exports = function (grunt) {
             }
         }
 
-        validate(source);
-        validate(destination);
+        function is_folder() {
+            var sourcePath = source.split('.');
+            var destPath = destinationRoot.split('.');
 
-        template = create_yui_module.run(source, options);
-        grunt.file.write(destination, template);
+
+            if(sourcePath.length === 1) { // if the source path has a dot
+                if(destPath.length !== 1) {
+                    grunt.fatal("Both the source and the destination must be folders or files.");
+                }
+                return true;
+            } else {
+                if(destPath.length === 1) {
+                    grunt.fatal("Both the source and the destination must be folders or files.");
+                }
+                return false;
+            }
+        }
+
+        function run(source, destPath) {
+            validate(source);
+            validate(destinationRoot);
+
+            template = create_yui_module.run(source, options);
+            grunt.file.write(destinationRoot + destPath, template);
+        }
+
+        if(is_folder()) {
+            grunt.file.recurse(source, function cb(abspath, rootdir, subdir, filename) {
+                var destPath = "";
+
+                if(subdir) {
+                    destPath = subdir;
+                }
+
+                destPath += filename;
+
+                run(abspath, destPath);
+            });
+        } else {
+            run(source, "");
+        }
+
     });
 
 };

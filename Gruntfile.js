@@ -78,6 +78,16 @@ module.exports = function(grunt) {
           version: '1.0.0',
           requires: ['module1', 'module2']
         }
+      },
+
+      recurse: {
+        files: {
+          src: 'test/fixtures',
+          dest: 'tmp/',
+        },
+        options: {
+          moduleName: 'mail-core-compose-template',
+        }
       }
     }
   });
@@ -90,7 +100,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'test']);
+  grunt.registerTask('default', ['clean', 'create_yui_module:all', 'create_yui_module:no_requires', 'create_yui_module:no_version', 'create_yui_module:no_namespace', 'create_yui_module:recurse', 'test']);
   grunt.registerTask('test', ['nodeunit']);
 
 };
