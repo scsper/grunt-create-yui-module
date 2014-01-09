@@ -59,5 +59,14 @@ exports.nodeunit = {
 
     test.equal(false, has_file, 'the file list should not include not_included_file.txt');
     test.done();
+  },
+
+  "should exclude the file by extension even if the extension is at uppercase": function(test) {
+    var filelist = fs.readdirSync('tmp'),
+      has_file = _.contains(filelist, 'not_include_uppercase_extension_file.TXT');
+
+    test.equal(false, has_file, 'the file list should not include not_include_uppercase_extension_file.TXT');
+
+    test.done();
   }
 };

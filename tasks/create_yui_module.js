@@ -47,7 +47,7 @@ module.exports = function (grunt) {
         if(is_folder()) {
             grunt.file.recurse(source, function cb(abspath, rootdir, subdir, filename) {
 
-                if(exclude_extension && path.extname(abspath) === exclude_extension) {
+                if(exclude_extension && path.extname(abspath).toLowerCase() === exclude_extension) {
                     return;
                 }
 
